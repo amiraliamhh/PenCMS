@@ -1,0 +1,28 @@
+.navbar {
+  background-color: #2BBBAD;
+}
+
+.header, .footer {
+  background-color: #00695c;
+  padding: 25px;
+}
+
+a {
+  color: #1C2331;
+}
+
+h1, h3 {
+  color: #ddd;
+}
+
+form {
+  margin: 50px;
+}
+
+button {
+  background-color: #2BBBAD;
+}
+
+.post {
+  margin: 20px;
+}
