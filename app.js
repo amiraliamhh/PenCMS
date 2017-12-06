@@ -1,14 +1,24 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+const express         = require('express');
+const path            = require('path');
+const favicon         = require('serve-favicon');
+const logger          = require('morgan');
+const cookieParser    = require('cookie-parser');
+const bodyParser      = require('body-parser');
+const mongoose        = require('mongoose');
+const MongoStore      = require('connect-mongo')(session);
 
-var index = require('./routes/index');
-var users = require('./routes/users');
+const index           = require('./routes/index');
+const users           = require('./routes/users');
+const config          = require('./config/secret');
 
 var app = express();
+
+mongoose.connect(config.database, function(err) {
+  if (err) console.log(err);
+  console.log("Connected to the database");
+});
+
+const sessionStore    = new MongoStore({ url: config.database, autoReconnect: true });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,6 +31,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  resave: true,
+  saveUninitialized: true,
+  secret: config.secret,
+  store: new MongoStore({ url: config.database, autoReconnect: true })
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+app.use(function(req, res, next) {
+  res.locals.user = req.user;
+  next();
+});
 
 app.use('/', index);
 app.use('/users', users);
