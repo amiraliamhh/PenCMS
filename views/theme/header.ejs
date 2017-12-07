@@ -16,20 +16,16 @@
     </div>
     <div class="container-fluid navbar">
         <ul class="nav nav-pills nav-fill">
-            <li class="nav-item">
-                <a href="/" class="nav-link">Home</a>
-            </li>            
-            <li class="nav-item">
-                <a href="/tutorials" class="nav-link">Tutorials</a>
-            </li>                                    
-            <li class="nav-item">
-                <a href="/posts" class="nav-link">Posts</a>
-            </li>            
-            <li class="nav-item">
-                <a href="/signup" class="nav-link">Sign Up</a>
-            </li>
-            <li class="nav-item">
-                <a href="/login" class="nav-link">Login</a>
-            </li>            
+            <% for (let i = 0; i < menu.length; i++) { %>
+                <% if (current == menu[i]) { %>
+                    <li class="nav-item">
+                        <strong><a href="<%= links[i] %>" class="nav-link" ><%= menu[i] %></a></strong>
+                    </li>
+                <% } else { %>
+                    <li class="nav-item">
+                        <a href="<%= links[i] %>" class="nav-link"><%= menu[i] %></a>
+                    </li>                    
+                <% } %>
+            <% } %>            
         </ul>
     </div>

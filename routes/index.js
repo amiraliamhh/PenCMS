@@ -11,7 +11,13 @@ let users               = new Users();
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-  res.render('index', { title: 'Express' });
+  if (req.user) {
+    Users.findOne({email: req.user.email}, function(err, user) {
+      res.render('index', { username: user.username, menu: ['Home', 'Tutorials', 'Posts', 'Profile'], links: ['/', '/tutorials', '/posts', '/admin/profile'],current: 'Home' });
+    });
+  } else {
+    res.render('index', { username: '', menu: ['Home', 'Tutorials', 'Sign Up', 'Login'],links: ['/', '/tutorials', '/signup', '/login'] ,current: 'Home'});
+  }
 });
 
 router.route('/login')
@@ -29,12 +35,12 @@ router.route('/signup')
     res.render('signup', {});
   })
   .post((req, res, next) => {
-    User.findOne({email: email}, function(err, user) {
+    Users.findOne({email: req.body.email}, function(err, user) {
       if (err) throw err;
       if (user) {
         res.render('error', {error: 'existing user'});
       } else {
-        let user = new User();
+        let user = new Users();
         user.email  = req.body.email;
         user.username = req.body.username;
         user.password = req.body.password;
