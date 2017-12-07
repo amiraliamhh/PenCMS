@@ -14,14 +14,22 @@ router.route('/profile')
         Users.findOne({email: req.user.email}, function(err, user) {
             if (err) throw err;
             if (!user) return '';
-            userInfo = {
-                username: user.username,
-                email: user.email,
-                profilePicPath: user.profilePicPath,
-                bio: user.bio
-            }
+            var renderProfile = new Promise((resolve, reject) => {
+                userInfo = {
+                    username: user.username,
+                    email: user.email,
+                    profilePicPath: user.profilePicPath,
+                    bio: user.bio                    
+                };
+                resolve();
+            });
+            renderProfile.then(() => {
+                res.render('./admin/profile', {user: GLOBAL.userInfo, menu: ['Home', 'Tutorials', 'Posts', 'Profile'], links: ['/', '/tutorials', '/posts', '/admin/profile'], current: 'Profile'});
+            }).catch(() => {
+                res.render('./admin/profile', {user: ' ', menu: ['Home', 'Tutorials', 'Posts', 'Profile'], links: ['/', '/tutorials', '/posts', '/admin/profile'], current: 'Profile'});
+            })
         });
-        res.render('./admin/profile', {username: global.userInfo.username, menu: ['Home', 'Tutorials', 'Posts', 'Profile'], links: ['/', '/tutorials', '/posts', '/admin/profile'], current: 'Profile'});
+        
     })
 
 router.route('/edit-profile')

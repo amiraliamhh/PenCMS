@@ -29,3 +29,13 @@
             <% } %>            
         </ul>
     </div>
+    <br>
+    <% if (user) { %>
+        <div class="alert alert-primary container" role="alert">
+            Hi <%= user.username %>! Welcome to PenCMS!
+        </div>
+    <% } else { %>
+        <div class="alert alert-danger container" role="alert">
+            You are not logged in yet!
+        </div>
+    <% } %>

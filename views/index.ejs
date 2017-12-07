@@ -1,12 +1,32 @@
 <%- include('theme/header.ejs') %>
+<div class="container-fluid">
+    <img src="images/node.jpg" alt="" width="100%">
+</div>
 <br>
-<% if (username) { %>
-    <div class="alert alert-primary container" role="alert">
-        Hi <%= username %>! Welcome to PenCMS!
+<br>
+<div class="container">
+    <h1 class="text-justify text-center container-fluid features">Features</h1>
+    <hr>
+</div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Entirely Written in Javascript!</h4>
+                    <p class="card-text">All you need to know to start developing PenCMS apps, is Javascript!</p>
+                </div>
+            </div>        
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Built for Marketing teams!</h4>
+                    <p class="card-text">See stats, evaluate impressions you've made, without any 3rd party plugin!</p>
+                </div>
+            </div>        
+        </div>    
     </div>
-<% } else { %>
-    <div class="alert alert-danger container" role="alert">
-        You are not logged in yet!
-    </div>
-<% } %>
+</div>
+<br>
 <%- include('theme/footer.ejs') %>

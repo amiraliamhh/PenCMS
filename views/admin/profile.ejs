@@ -1,12 +1,25 @@
 <%- include('../theme/header.ejs') %>
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <img src="/images/profile.png" alt="profile" class="img-thumbnail">
+        </div>
+        <div class="col-6">
+            <h2>Your Information</h2>
+            <hr>
+            <br>
+            <h5>Username: <%= user.username %></h5>
+            <h5>Email: <%= user.email %></h5>
+            <br>
+            <br>
+            <br>
+            <h2>Actions</h2>
+            <hr>
+            <br>
+            <button class="btn btn-lg btn-outline-success">Your Posts</button>
+            <button class="btn btn-lg btn-outline-success">New Post</button>
+        </div>
+    </div>
+</div>
 <br>
-<% if (username) { %>
-    <div class="alert alert-primary container" role="alert">
-        Hi <%= username %>! Welcome to PenCMS!
-    </div>
-<% } else { %>
-    <div class="alert alert-danger container" role="alert">
-        You are not logged in yet!
-    </div>
-<% } %>
 <%- include('../theme/footer.ejs') %>

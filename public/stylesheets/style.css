@@ -11,7 +11,7 @@ a {
   color: #1C2331;
 }
 
-h1, h3 {
+.header h1, .header h3 {
   color: #ddd;
 }
 
@@ -25,4 +25,8 @@ button {
 
 .post {
   margin: 20px;
+}
+
+.features {
+  color: #666;
 }

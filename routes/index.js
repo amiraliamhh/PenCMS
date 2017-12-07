@@ -13,10 +13,10 @@ let users               = new Users();
 router.get('/', (req, res, next) => {
   if (req.user) {
     Users.findOne({email: req.user.email}, function(err, user) {
-      res.render('index', { username: user.username, menu: ['Home', 'Tutorials', 'Posts', 'Profile'], links: ['/', '/tutorials', '/posts', '/admin/profile'],current: 'Home' });
+      res.render('index', { user: user, menu: ['Home', 'Tutorials', 'Posts', 'Profile'], links: ['/', '/tutorials', '/posts', '/admin/profile'],current: 'Home' });
     });
   } else {
-    res.render('index', { username: '', menu: ['Home', 'Tutorials', 'Sign Up', 'Login'],links: ['/', '/tutorials', '/signup', '/login'] ,current: 'Home'});
+    res.render('index', { user: '', menu: ['Home', 'Tutorials', 'Sign Up', 'Login'],links: ['/', '/tutorials', '/signup', '/login'] ,current: 'Home'});
   }
 });
 
