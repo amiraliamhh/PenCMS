@@ -1,14 +1,28 @@
-const express = require('express');
-const router = express.Router();
-const User = require('../models/user');
+const express           = require('express');
+const router            = express.Router();
+const passport          = require('passport');
+const passportConfig    = require('../config/passport');
+const mongoose          = require('mongoose');
+const Posts             = require('../models/post')
+const Users             = require('../models/user');
+
+let posts               = new Posts();
+let users               = new Users();
+
 /* GET home page. */
 router.get('/', (req, res, next) => {
   res.render('index', { title: 'Express' });
 });
 
-router.get('/login', (req, res, next) => {
-  res.render('login', {});
-})
+router.route('/login')
+  .get((req, res, next) => {
+    res.render('login', {});
+  })
+  .post(passport.authenticate('local-login', {
+    successRedirect: '/admin/profile',
+    failureRedirect: '/login',
+    failureFlash: true
+  }));
 
 router.route('/signup')
   .get((req, res, next) => {
@@ -37,6 +51,15 @@ router.route('/signup')
 
 router.route('/posts')
   .get((req, res, next) => {
+    Posts.find({}, function (err, _post) {
+      if (err)
+        return err;
+
+      if (!_post)
+        return console.log('No posts yet!');
+
+      console.log(_post);
+    })
     res.render('posts', {});
   })
 

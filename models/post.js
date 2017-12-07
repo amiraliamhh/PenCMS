@@ -16,7 +16,7 @@ var PostSchema = new Schema({
         required: true
     },
     author: {
-        // user id is stored
+        // user email is stored
         type: String,
         required: true
     },
@@ -85,5 +85,5 @@ var CommentsSchema = new Schema({
     }
 });
 
-exports.posts = mongoose.model('Posts', PostSchema);
-exports.comments = mongoose.model('Comments', CommentsSchema);
+module.exports = mongoose.model('Posts', PostSchema);
+module.exports = mongoose.model('Comments', CommentsSchema);
