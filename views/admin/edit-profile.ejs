@@ -1,0 +1,16 @@
+<%- include('../theme/header.ejs') %>
+<form action="" method="post" class="container col-4" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" class="form-control" name="username">
+        <br>
+        <label for="pic">Profile Pic:</label>
+        <input type="file" class="form-control" name="profilePic">
+        <br>
+        <label for="bio">Bio:</label>
+        <textarea rows="3" type="text" class="form-control" name="bio"></textarea>
+        <br>
+        <button type="submit" class="btn">Submit</button>
+    </div>
+</form>
+<%- include('../theme/footer.ejs') %>

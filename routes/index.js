@@ -22,7 +22,7 @@ router.get('/', (req, res, next) => {
 
 router.route('/login')
   .get((req, res, next) => {
-    res.render('login', {});
+    res.render('login', { user: '', menu: ['Home', 'Tutorials', 'Posts','Sign Up', 'Login'],links: ['/', '/tutorials', '/posts','/signup', '/login'] ,current: 'Login'});
   })
   .post(passport.authenticate('local-login', {
     successRedirect: '/admin/profile',
@@ -32,7 +32,7 @@ router.route('/login')
 
 router.route('/signup')
   .get((req, res, next) => {
-    res.render('signup', {});
+    res.render('signup', { user: '', menu: ['Home', 'Tutorials', 'Posts', 'Sign Up', 'Login'],links: ['/', '/tutorials', '/posts','/signup', '/login'] ,current: 'Sign Up'});
   })
   .post((req, res, next) => {
     Users.findOne({email: req.body.email}, function(err, user) {
@@ -66,7 +66,21 @@ router.route('/posts')
 
       console.log(_post);
     })
-    res.render('posts', {});
+    if (req.user) {
+      res.render('posts', {user: GLOBAL.userInfo, menu: ['Home', 'Tutorials', 'Posts', 'Profile'], links: ['/', '/tutorials', '/posts', '/admin/profile'], current: 'Posts'});
+    } else {
+      res.render('posts', { user: '', menu: ['Home', 'Tutorials', 'Posts', 'Sign Up', 'Login'],links: ['/', '/tutorials', '/posts','/signup', '/login'] ,current: 'Posts'});
+    }
+    
+  })
+
+router.route('/tutorials')
+  .get((req, res, next) => {
+    if (req.user) {
+      res.render('tutorials', {user: GLOBAL.userInfo, menu: ['Home', 'Tutorials', 'Posts', 'Profile'], links: ['/', '/tutorials', '/posts', '/admin/profile'], current: 'Tutorials'});
+    } else {
+      res.render('tutorials', { user: '', menu: ['Home', 'Tutorials', 'Posts', 'Sign Up', 'Login'],links: ['/', '/tutorials', '/posts','/signup', '/login'] ,current: 'Tutorials'});
+    }    
   })
 
 module.exports = router;

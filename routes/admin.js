@@ -26,7 +26,7 @@ router.route('/profile')
             renderProfile.then(() => {
                 res.render('./admin/profile', {user: GLOBAL.userInfo, menu: ['Home', 'Tutorials', 'Posts', 'Profile'], links: ['/', '/tutorials', '/posts', '/admin/profile'], current: 'Profile'});
             }).catch(() => {
-                res.render('./admin/profile', {user: ' ', menu: ['Home', 'Tutorials', 'Posts', 'Profile'], links: ['/', '/tutorials', '/posts', '/admin/profile'], current: 'Profile'});
+                res.render('./admin/profile', {user: '', menu: ['Home', 'Tutorials', 'Posts', 'Profile'], links: ['/', '/tutorials', '/posts', '/admin/profile'], current: 'Profile'});
             })
         });
         
@@ -34,7 +34,7 @@ router.route('/profile')
 
 router.route('/edit-profile')
     .get(passportConfig.isAuthenticated, (req, res, next) => {
-        res.render('./admin/edit-profile', {})
+        res.render('./admin/edit-profile', {user: GLOBAL.userInfo, menu: ['Home', 'Tutorials', 'Posts', 'Profile'], links: ['/', '/tutorials', '/posts', '/admin/profile'], current: 'Profile'});
     })
     .post(passportConfig.isAuthenticated, (req, res, next) => {
 
@@ -42,7 +42,7 @@ router.route('/edit-profile')
 
 router.route('/add-post')
     .get(passportConfig.isAuthenticated, (req, res, next) => {
-        res.render('./admin/add-post', {});
+        res.render('./admin/add-post', {user: GLOBAL.userInfo, menu: ['Home', 'Tutorials', 'Posts', 'Profile'], links: ['/', '/tutorials', '/posts', '/admin/profile'], current: 'Profile'});
     })
 
 router.route('/my-posts')
@@ -64,12 +64,12 @@ router.route('/my-posts')
                         likers: _post[i].likers,
                         createdAt: post[i].createdAt
                     };
-                    userPosts.push(user_posts);
+                    GLOBAL.userPosts.push(user_posts);
                 };
             });
         });
         
-        res.render('./admin/my-posts', {});
+        res.render('./admin/my-posts', {posts: GLOBAL.userPosts});
     })
 
 router.route('/delete-post')
