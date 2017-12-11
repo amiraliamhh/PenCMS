@@ -6,7 +6,8 @@ const mongoose          = require('mongoose');
 const Posts             = require('../models/post')
 const Users             = require('../models/user');
 
-let posts               = new Posts();
+let posts               = new Posts.Posts();
+let comments            = new Posts.Comments();
 let users               = new Users();
 
 /* GET home page. */

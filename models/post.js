@@ -85,5 +85,5 @@ var CommentsSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('Posts', PostSchema);
-module.exports = mongoose.model('Comments', CommentsSchema);
+exports.Posts    = mongoose.model('Posts', PostSchema);
+exports.Comments = mongoose.model('Comments', CommentsSchema);

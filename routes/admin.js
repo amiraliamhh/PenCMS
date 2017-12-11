@@ -7,7 +7,7 @@ const Users             = require('../models/user');
 const Posts             = require('../models/post');
 
 let users               = new Users();
-let posts               = new Posts();
+let posts               = new Posts.Posts();
 
 router.route('/profile')
     .get(passportConfig.isAuthenticated, (req, res, next) => {
